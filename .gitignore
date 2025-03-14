@@ -43,3 +43,6 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 # TLS Certificates
 .certs/
+
+DB_USERNAME=postgres
+DB_PASSWORD=filip77

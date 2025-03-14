@@ -2,6 +2,18 @@
 
 Ovaj repozitorijum sadrži bazu podataka za fitness aplikaciju, uključujući SQL skriptu za kreiranje tabela i Java kod.
 
+## 📥 Instalacija
+1. Klonirajte repozitorijum:
+   ```sh
+   git clone https://github.com/k0ntrol/MyFitness.git
+   
+## 🛠️ Korišćenje
+
+### Pokretanje aplikacije
+1. Instalirajte PostgreSQL i podesite bazu podataka.
+2. Klonirajte repozitorijum.
+3. Konfigurišite `application.properties` sa vašim kredencijalima za bazu podataka.
+4. Pokrenite aplikaciju koristeći Java IDE ili komandnu liniju.
 ## 📊 ER Dijagram
 ![ER Dijagram](er_diagram.png)
 
@@ -30,11 +42,10 @@ Baza podataka sadrži sledeće tabele:
 - **IntelliJ IDEA** - Razvojno okruženje
 - **Git** - Za kontrolu verzija
 
-## 📥 Instalacija
-1. Klonirajte repozitorijum:
-   ```sh
-   git clone https://github.com/k0ntrol/MyFitness.git
-   
+## 📊 Status projekta
+
+### 🚧 U razvoju 🚧
+
 ## 📝 Autor
 👤 *Filip Cokovski*  
 📧 *fcokovski@gmail.com* 
