@@ -48,4 +48,5 @@ Baza podataka sadrži sledeće tabele:
 
 ## 📝 Autor
 👤 *Filip Cokovski*  
+📕 *Broj indexa:53-23*  
 📧 *fcokovski@gmail.com* 
