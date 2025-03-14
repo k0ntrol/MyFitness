@@ -1,85 +1,33 @@
-# code-with-quarkus
+# 🏋️ Fitness Tracker - Database Model
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Ovaj repozitorijum sadrži bazu podataka za fitness aplikaciju, uključujući SQL skriptu za kreiranje tabela i Java POJO klase.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## 📊 ER Dijagram
+![ER Dijagram](er_diagram.png)
 
-## Running the application in dev mode
+## 📂 Struktura baze podataka
+Baza podataka sadrži sledeće tabele:
 
-You can run your application in dev mode that enables live coding using:
+- **users** - Informacije o korisnicima (ime, prezime, email, itd.).
+- **muscle_group** - Grupe mišića (npr. "Noge", "Ruke").
+- **muscle** - Pojedinačni mišići, povezani sa grupama mišića.
+- **exercise** - Vežbe sa opisima.
+- **exercise_muscle** - Many-to-Many veza između vežbi i mišića.
+- **workout** - Programi vežbanja sa vremenom trajanja.
+- **workout_exercise** - Many-to-Many veza između programa vežbanja i vežbi.
+- **user_progress** - Napredak korisnika (ponavljanja, težina, datum).
 
-```shell script
-./mvnw quarkus:dev
-```
+## 🚀 Tehnologije
+- **PostgreSQL** - Baza podataka
+- **Java** - Backend (POJO modeli)
+- **IntelliJ IDEA** - Razvojno okruženje
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
-```
-
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- REST ([guide](https://quarkus.io/guides/rest)): A Jakarta REST implementation utilizing build time processing and Vert.x. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it.
-- Hibernate ORM ([guide](https://quarkus.io/guides/hibernate-orm)): Define your persistent model with Hibernate ORM and Jakarta Persistence
-- REST Client ([guide](https://quarkus.io/guides/rest-client)): Call REST services
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- JDBC Driver - PostgreSQL ([guide](https://quarkus.io/guides/datasource)): Connect to the PostgreSQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
+## 📥 Instalacija
+1. Klonirajte repozitorijum:
+   ```sh
+   git clone https://github.com/k0ntrol/myfitness.git
 
 
-
-### REST Client
-
-Invoke different services through REST with JSON
-
-[Related guide section...](https://quarkus.io/guides/rest-client)
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+## 📝 Autor
+👤 *Filip Cokovski*  
+📧 *fcokovski@gmail.com* 
