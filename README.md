@@ -1,6 +1,6 @@
-# 🏋️ Fitness Tracker - Database Model
+# 🏋️ MyFitness - Your Gym Diary
 
-Ovaj repozitorijum sadrži bazu podataka za fitness aplikaciju, uključujući SQL skriptu za kreiranje tabela i Java kod.
+Ovaj repozitorijum sadrži SQL skripte za kreiranje baze podataka i Java kod za fitness aplikaciju, sa podrškom za praćenje treninga, vežbi i korisničkog napretka.
 
 ## 📥 Instalacija
 1. Klonirajte repozitorijum:
