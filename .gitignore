@@ -44,5 +44,5 @@ nb-configuration.xml
 # TLS Certificates
 .certs/
 
-DB_USERNAME=postgres
-DB_PASSWORD=filip77
+# Ignorisi .env fajl
+.env

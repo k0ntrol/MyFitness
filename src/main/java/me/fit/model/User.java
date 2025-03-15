@@ -1,20 +1,25 @@
-package model;
+package me.fit.model;
+
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class User {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String firstName;
     private String lastName;
     private String username;
     private String email;
     private String birthDate;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserProgress> progressList;
 
     public User() {}
 
-    public User(int id, String firstName, String lastName, String username, String email, String birthDate) {
-        this.id = id;
+    public User(String firstName, String lastName, String username, String email, String birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -22,19 +27,11 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -68,6 +65,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public List<UserProgress> getProgressList() {
