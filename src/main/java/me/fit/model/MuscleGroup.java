@@ -1,17 +1,30 @@
-package model;
+package me.fit.model;
+
+import jakarta.persistence.*;
 
 import java.util.List;
 
+@Entity
 public class MuscleGroup {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
+    @OneToMany (mappedBy = "muscleGroup")
     private List<Muscle> muscles;
 
     public MuscleGroup() {}
 
-    public MuscleGroup(int id, String name) {
-        this.id = id;
+    public MuscleGroup( String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,13 +41,5 @@ public class MuscleGroup {
 
     public void setMuscles(List<Muscle> muscles) {
         this.muscles = muscles;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

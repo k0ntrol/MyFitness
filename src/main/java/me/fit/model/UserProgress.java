@@ -1,22 +1,30 @@
-package model;
+package me.fit.model;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 
+@Entity
 public class UserProgress {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private double userWeight;
     private Date date;
     private int reps;
     private int sets;
     private double weight;
+    @ManyToOne
     private User user;
+    @ManyToOne
     private Workout workout;
+    @ManyToOne
     private Exercise exercise;
 
-    public UserProgress() {}
+    public UserProgress() {
+    }
 
-    public UserProgress(int id, double userWeight, Date date, int reps, int sets, double weight, User user, Workout workout, Exercise exercise) {
-        this.id = id;
+    public UserProgress(double userWeight, Date date, int reps, int sets, double weight, User user, Workout workout, Exercise exercise) {
         this.userWeight = userWeight;
         this.date = date;
         this.reps = reps;
@@ -27,11 +35,11 @@ public class UserProgress {
         this.exercise = exercise;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
