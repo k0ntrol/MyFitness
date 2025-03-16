@@ -2,24 +2,30 @@ package me.fit.model;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
     private String username;
     private String email;
-    private String birthDate;
+    @Column(name = "birth_date")
+    private java.sql.Date birthDate;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserProgress> progressList;
 
     public User() {}
 
-    public User(String firstName, String lastName, String username, String email, String birthDate) {
+    public User(String firstName, String lastName, String username, String email, java.sql.Date birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -67,11 +73,11 @@ public class User {
         this.email = email;
     }
 
-    public String getBirthDate() {
+    public java.sql.Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(java.sql.Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -81,5 +87,29 @@ public class User {
 
     public void setProgressList(List<UserProgress> progressList) {
         this.progressList = progressList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof User user)) return false;
+        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(birthDate, user.birthDate) && Objects.equals(progressList, user.progressList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, username, email, birthDate, progressList);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", progressList=" + progressList +
+                '}';
     }
 }
