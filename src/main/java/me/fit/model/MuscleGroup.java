@@ -3,8 +3,10 @@ package me.fit.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table(name = "muscle_group")
 public class MuscleGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,5 +43,25 @@ public class MuscleGroup {
 
     public void setMuscles(List<Muscle> muscles) {
         this.muscles = muscles;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof MuscleGroup that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(muscles, that.muscles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, muscles);
+    }
+
+    @Override
+    public String toString() {
+        return "MuscleGroup{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", muscles=" + muscles +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package me.fit.model;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "muscle")
@@ -58,6 +59,27 @@ public class Muscle {
 
     public void setExerciseMuscles(List<ExerciseMuscle> exerciseMuscles) {
         this.exerciseMuscles = exerciseMuscles;
+    }
+
+    @Override
+    public String toString() {
+        return "Muscle{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", muscleGroup=" + muscleGroup +
+                ", exerciseMuscles=" + exerciseMuscles +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Muscle muscle)) return false;
+        return Objects.equals(id, muscle.id) && Objects.equals(name, muscle.name) && Objects.equals(muscleGroup, muscle.muscleGroup) && Objects.equals(exerciseMuscles, muscle.exerciseMuscles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, muscleGroup, exerciseMuscles);
     }
 }
 
