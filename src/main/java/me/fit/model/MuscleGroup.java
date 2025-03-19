@@ -1,18 +1,11 @@
 package me.fit.model;
 
-import jakarta.persistence.*;
-
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "muscle_group")
 public class MuscleGroup {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany (mappedBy = "muscleGroup")
     private List<Muscle> muscles;
 
     public MuscleGroup() {}
