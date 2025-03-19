@@ -1,27 +1,14 @@
 package me.fit.model;
 
-import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "exercise")
 public class Exercise {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String name;
-
-    @Column
     private String description;
-
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ExerciseMuscle> exerciseMuscles;
-
-    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutExercise> workoutExercises;
+    private List<Muscle> muscles;
+    private List<Workout> exercises;
 
     public Exercise() {
     }
@@ -30,6 +17,7 @@ public class Exercise {
         this.name = name;
         this.description = description;
     }
+
     public Long getId() {
         return id;
     }
@@ -54,20 +42,31 @@ public class Exercise {
         this.description = description;
     }
 
-    public List<ExerciseMuscle> getExerciseMuscles() {
-        return exerciseMuscles;
+    public List<Muscle> getMuscles() {
+        return muscles;
     }
 
-    public void setExerciseMuscles(List<ExerciseMuscle> exerciseMuscles) {
-        this.exerciseMuscles = exerciseMuscles;
+    public void setMuscles(List<Muscle> muscles) {
+        this.muscles = muscles;
     }
 
-    public List<WorkoutExercise> getWorkoutExercises() {
-        return workoutExercises;
+    public List<Workout> getExercises() {
+        return exercises;
     }
 
-    public void setWorkoutExercises(List<WorkoutExercise> workoutExercises) {
-        this.workoutExercises = workoutExercises;
+    public void setExercises(List<Workout> exercises) {
+        this.exercises = exercises;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Exercise exercise)) return false;
+        return Objects.equals(id, exercise.id) && Objects.equals(name, exercise.name) && Objects.equals(description, exercise.description) && Objects.equals(muscles, exercise.muscles) && Objects.equals(exercises, exercise.exercises);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, muscles, exercises);
     }
 
     @Override
@@ -76,20 +75,11 @@ public class Exercise {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", exerciseMuscles=" + exerciseMuscles +
-                ", workoutExercises=" + workoutExercises +
+                ", muscles=" + muscles +
+                ", exercises=" + exercises +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Exercise exercise)) return false;
-        return Objects.equals(id, exercise.id) && Objects.equals(name, exercise.name) && Objects.equals(description, exercise.description) && Objects.equals(exerciseMuscles, exercise.exerciseMuscles) && Objects.equals(workoutExercises, exercise.workoutExercises);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, exerciseMuscles, workoutExercises);
-    }
 }
+
+
 
