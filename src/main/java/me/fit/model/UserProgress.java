@@ -13,21 +13,24 @@ public class UserProgress {
     private Long id;
     @Column(name = "user_weight")
     private double userWeight;
-    private Date date;
+    private java.sql.Date date;
     private int reps;
     private int sets;
     private double weight;
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @ManyToOne
+    @JoinColumn(name = "workout_id", nullable = false)
     private Workout workout;
     @ManyToOne
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     public UserProgress() {
     }
 
-    public UserProgress(double userWeight, Date date, int reps, int sets, double weight, User user, Workout workout, Exercise exercise) {
+    public UserProgress(double userWeight, java.sql.Date date, int reps, int sets, double weight, User user, Workout workout, Exercise exercise) {
         this.userWeight = userWeight;
         this.date = date;
         this.reps = reps;
@@ -54,11 +57,11 @@ public class UserProgress {
         this.userWeight = userWeight;
     }
 
-    public Date getDate() {
+    public java.sql.Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.sql.Date date) {
         this.date = date;
     }
 
