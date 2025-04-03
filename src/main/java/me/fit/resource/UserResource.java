@@ -7,18 +7,20 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import me.fit.model.User;
-import me.fit.repository.UserService;
+import me.fit.repository.UserRepository;
 
+@Path("/user/")
 public class UserResource {
 
     @Inject
-    UserService userService;
+    UserRepository userRepository;
 
-    @Path("addUser")
+    @Path("/addUser/")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addUser(User s) {
-        User user = userService.addUser(s);
+        User user = userRepository.addUser(s);
         return Response.ok().build();
     }
+
 }

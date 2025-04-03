@@ -1,13 +1,28 @@
 package me.fit.model;
 
+import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "muscle")
 public class Muscle {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "muscle_group_id", nullable = false)
     private MuscleGroup muscleGroup;
-    private List<Exercise> exercises;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }, mappedBy = "muscles")
+    private Set<Exercise> exercises;
 
     public Muscle() {
     }
@@ -41,11 +56,11 @@ public class Muscle {
         this.muscleGroup = muscleGroup;
     }
 
-    public List<Exercise> getExercises() {
+    public Set<Exercise> getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<Exercise> exercises) {
+    public void setExercises(Set<Exercise> exercises) {
         this.exercises = exercises;
     }
 
