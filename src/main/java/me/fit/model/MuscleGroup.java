@@ -1,12 +1,20 @@
 package me.fit.model;
 
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "muscle_group")
 public class MuscleGroup {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private List<Muscle> muscles;
+    @OneToMany(mappedBy = "muscleGroup",cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Muscle> muscles;
 
     public MuscleGroup() {}
 
@@ -30,11 +38,11 @@ public class MuscleGroup {
         this.name = name;
     }
 
-    public List<Muscle> getMuscles() {
+    public Set<Muscle> getMuscles() {
         return muscles;
     }
 
-    public void setMuscles(List<Muscle> muscles) {
+    public void setMuscles(Set<Muscle> muscles) {
         this.muscles = muscles;
     }
 

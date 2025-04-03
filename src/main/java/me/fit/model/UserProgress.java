@@ -1,17 +1,30 @@
 package me.fit.model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "user_progress")
 public class UserProgress {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double userWeight;
+    @Temporal(TemporalType.DATE)
     private Date date;
     private int reps;
     private int sets;
     private double weight;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
+    @ManyToOne
+    @JoinColumn(name = "workout_id", nullable = false)
     private Workout workout;
+    @ManyToOne
+    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     public UserProgress() {

@@ -7,7 +7,7 @@ import jakarta.transaction.Transactional;
 import me.fit.model.User;
 
 @Dependent
-public class UserService {
+public class UserRepository {
 
     @Inject
     EntityManager em;
