@@ -1,5 +1,6 @@
 package me.fit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -7,7 +8,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "user_progress")
+@NamedQueries({
+        @NamedQuery(name = UserProgress.GET_PROGRESS_FOR_USER, query = "Select up from UserProgress up where up.user.id = :userId")
+})
 public class UserProgress {
+
+    public static final String GET_PROGRESS_FOR_USER = "UserProgress.getProgressForUser";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,13 +24,10 @@ public class UserProgress {
     private int sets;
     private double weight;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
     @ManyToOne
-    @JoinColumn(name = "workout_id", nullable = false)
     private Workout workout;
     @ManyToOne
-    @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     public UserProgress() {
@@ -114,29 +117,55 @@ public class UserProgress {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof UserProgress that)) return false;
-        return Double.compare(userWeight, that.userWeight) == 0 && reps == that.reps && sets == that.sets && Double.compare(weight, that.weight) == 0 && Objects.equals(id, that.id) && Objects.equals(date, that.date) && Objects.equals(user, that.user) && Objects.equals(workout, that.workout) && Objects.equals(exercise, that.exercise);
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        long temp;
+        temp = Double.doubleToLongBits(userWeight);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        result = prime * result + reps;
+        result = prime * result + sets;
+        temp = Double.doubleToLongBits(weight);
+        result = prime * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, userWeight, date, reps, sets, weight, user, workout, exercise);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        UserProgress other = (UserProgress) obj;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        if (Double.doubleToLongBits(userWeight) != Double.doubleToLongBits(other.userWeight))
+            return false;
+        if (reps != other.reps)
+            return false;
+        if (sets != other.sets)
+            return false;
+        if (Double.doubleToLongBits(weight) != Double.doubleToLongBits(other.weight))
+            return false;
+        return true;
     }
 
     @Override
     public String toString() {
-        return "UserProgress{" +
-                "id=" + id +
-                ", userWeight=" + userWeight +
-                ", date=" + date +
-                ", reps=" + reps +
-                ", sets=" + sets +
-                ", weight=" + weight +
-                ", user=" + user +
-                ", workout=" + workout +
-                ", exercise=" + exercise +
-                '}';
+        return "UserProgress [id=" + id + ", userWeight=" + userWeight + ", date=" + date +
+                ", reps=" + reps + ", sets=" + sets + ", weight=" + weight + "]";
     }
 }
 

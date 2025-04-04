@@ -13,7 +13,7 @@ public class MuscleGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "muscleGroup",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "muscleGroup",cascade = CascadeType.ALL)
     private Set<Muscle> muscles;
 
     public MuscleGroup() {}
