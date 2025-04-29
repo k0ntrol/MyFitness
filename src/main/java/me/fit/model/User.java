@@ -8,10 +8,12 @@ import java.util.*;
 @Table(name = "users")
 @NamedQueries({
         @NamedQuery(name = User.GET_ALL_USERS, query = "Select u from User u")
+        @NamedQuery(name = User.GET_ALL_USERS_BY_NAME, query = "Select u from User u where u.firstName=:name")
 })
 public class User {
 
     public static final String GET_ALL_USERS = "User.getAllUsers";
+    public static final String GET_ALL_USERS_BY_NAME = "User.getAllUsersByName";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
