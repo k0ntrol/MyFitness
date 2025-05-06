@@ -17,12 +17,6 @@ public class Muscle {
     @ManyToOne
     @JoinColumn(name = "muscle_group_id", nullable = false)
     private MuscleGroup muscleGroup;
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }, mappedBy = "muscles")
-    private Set<Exercise> exercises;
 
     public Muscle() {
     }
@@ -56,23 +50,15 @@ public class Muscle {
         this.muscleGroup = muscleGroup;
     }
 
-    public Set<Exercise> getExercises() {
-        return exercises;
-    }
-
-    public void setExercises(Set<Exercise> exercises) {
-        this.exercises = exercises;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Muscle muscle)) return false;
-        return Objects.equals(id, muscle.id) && Objects.equals(name, muscle.name) && Objects.equals(muscleGroup, muscle.muscleGroup) && Objects.equals(exercises, muscle.exercises);
+        return Objects.equals(id, muscle.id) && Objects.equals(name, muscle.name) && Objects.equals(muscleGroup, muscle.muscleGroup);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, muscleGroup, exercises);
+        return Objects.hash(id, name, muscleGroup);
     }
 
     @Override
@@ -81,7 +67,6 @@ public class Muscle {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", muscleGroup=" + muscleGroup +
-                ", exercises=" + exercises +
                 '}';
     }
 }

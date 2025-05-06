@@ -15,21 +15,6 @@ public class Exercise {
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "exercise_muscle",
-            joinColumns = { @JoinColumn(name = "exercise_id")},
-            inverseJoinColumns = {@JoinColumn(name = "muscle_id")}
-    )
-    private Set<Muscle> muscles;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "workout_exercise",
-            joinColumns = { @JoinColumn(name = "exercise_id")},
-            inverseJoinColumns = {@JoinColumn(name = "workout_id")}
-
-    )
-    private Set<Workout> workouts;
 
     public Exercise() {
     }
@@ -63,31 +48,15 @@ public class Exercise {
         this.description = description;
     }
 
-    public Set<Muscle> getMuscles() {
-        return muscles;
-    }
-
-    public void setMuscles(Set<Muscle> muscles) {
-        this.muscles = muscles;
-    }
-
-    public Set<Workout> getWorkouts() {
-        return workouts;
-    }
-
-    public void setWorkouts(Set<Workout> workouts) {
-        this.workouts = workouts;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Exercise exercise)) return false;
-        return Objects.equals(id, exercise.id) && Objects.equals(name, exercise.name) && Objects.equals(description, exercise.description) && Objects.equals(muscles, exercise.muscles) && Objects.equals(workouts, exercise.workouts);
+        return Objects.equals(id, exercise.id) && Objects.equals(name, exercise.name) && Objects.equals(description, exercise.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, muscles, workouts);
+        return Objects.hash(id, name, description);
     }
 
     @Override
@@ -96,8 +65,6 @@ public class Exercise {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", muscles=" + muscles +
-                ", workouts=" + workouts +
                 '}';
     }
 }

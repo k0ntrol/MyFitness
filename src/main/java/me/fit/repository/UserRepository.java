@@ -7,10 +7,10 @@ import jakarta.transaction.Transactional;
 import me.fit.model.User;
 import me.fit.model.UserProgress;
 import me.fit.exception.UserException;
+import me.fit.model.client.Exercise_Muscle;
+
 import java.util.HashSet;
 import java.util.List;
-import java.util.List;
-import java.util.Set;
 
 @Dependent
 public class UserRepository {
@@ -46,4 +46,10 @@ public class UserRepository {
 
         return users;
     }
+
+    @Transactional
+    public Exercise_Muscle createExerciseMuscle(Exercise_Muscle ex_muscle) {
+        return em.merge(ex_muscle);
+    }
+
 }

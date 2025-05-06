@@ -1,9 +1,11 @@
 package me.fit.resource;
 
+import me.fit.model.client.Exercise_Muscle;
+import me.fit.model.client.HolidayResponse;
 import me.fit.model.client.TimeResponse;
+import me.fit.restclient.HolidayClient;
 import me.fit.restclient.TimeClient;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
-import io.quarkus.scheduler.Scheduled;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -12,6 +14,7 @@ import me.fit.model.User;
 import me.fit.repository.UserRepository;
 import jakarta.ws.rs.QueryParam;
 import me.fit.exception.UserException;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.List;
 
@@ -24,7 +27,10 @@ public class UserResource {
     @Inject
     UserRepository userRepository;
 
+    @RestClient
     private TimeClient timeClient;
+
+
 
     @Path("/addUser/")
     @POST
@@ -64,5 +70,16 @@ public class UserResource {
 
         return  Response.ok().entity(time).build();
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("createExerciseMuscle")
+    public Response createExerciseMuscle(Exercise_Muscle ex_muscle) {
+        Exercise_Muscle exerciseMuscle = userRepository.createExerciseMuscle(ex_muscle);
+
+        return Response.ok().entity(exerciseMuscle).build();
+    }
+
+
 
 }

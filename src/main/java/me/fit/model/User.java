@@ -7,7 +7,7 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 @NamedQueries({
-        @NamedQuery(name = User.GET_ALL_USERS, query = "Select u from User u")
+        @NamedQuery(name = User.GET_ALL_USERS, query = "Select u from User u"),
         @NamedQuery(name = User.GET_ALL_USERS_BY_NAME, query = "Select u from User u where u.firstName=:name")
 })
 public class User {
