@@ -26,21 +26,19 @@ public class UserProgress {
     @ManyToOne
     private User user;
     @ManyToOne
-    private Workout workout;
-    @ManyToOne
     private Exercise exercise;
 
     public UserProgress() {
     }
 
-    public UserProgress(double userWeight, Date date, int reps, int sets, double weight, User user, Workout workout, Exercise exercise) {
+    public UserProgress(double userWeight, Date date, int reps, int sets, double weight, User user,Exercise exercise) {
         this.userWeight = userWeight;
         this.date = date;
         this.reps = reps;
         this.sets = sets;
         this.weight = weight;
         this.user = user;
-        this.workout = workout;
+
         this.exercise = exercise;
     }
 
@@ -98,14 +96,6 @@ public class UserProgress {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Workout getWorkout() {
-        return workout;
-    }
-
-    public void setWorkout(Workout workout) {
-        this.workout = workout;
     }
 
     public Exercise getExercise() {
