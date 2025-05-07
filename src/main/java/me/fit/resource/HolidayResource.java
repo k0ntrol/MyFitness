@@ -61,10 +61,15 @@ public class HolidayResource {
             ht.setTypeName(holiday.type);
             ht.setHoliday(h);
             h.setTypes(Set.of(ht));
-
+            try {
+                holidayRepository.addHolidayResponse(h);
+                saved.add(h);
+            } catch (HolidayException e) {
+                System.out.println("Praznik već postoji");
+            }
 
         }
         return Response.ok().entity(holidays).build();
-        
+
     }
 }

@@ -14,13 +14,11 @@ import jakarta.persistence.*;
 @NamedQueries({
         @NamedQuery(name = HolidayResponse.GET_ALL_HOLIDAYS, query = "Select h from HolidayResponse h"),
         @NamedQuery(name = HolidayResponse.GET_ALL_HOLIDAYS_BY_COUNTRY, query = "Select h from HolidayResponse h where h.countryCode =:countryCode"),
-        @NamedQuery(name = "HolidayResponse.GET_BY_COUNTRY_AND_YEAR",
-                query = "SELECT h FROM HolidayResponse h WHERE h.countryCode = :countryCode AND h.launchYear = :year")
+
 })
 public class HolidayResponse {
     public static final String GET_ALL_HOLIDAYS = "HolidayResponse.getAllHolidays";
     public static final String GET_ALL_HOLIDAYS_BY_COUNTRY = "HolidayResponse.getAllHolidaysByCountry";
-    public static final String GET_BY_COUNTRY_AND_YEAR = "HolidayResponse.getByCountryAndYear";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -23,9 +23,7 @@ public class HolidayRepository {
 
         holiday.setLaunchYear(LocalDate.parse(holiday.getDate()).getYear());
 
-        if (findByCountryAndYear(holiday.getCountryCode(), holiday.getLaunchYear()) != null) {
-            throw new HolidayException("Praznik za ovu godinu i zemlju već postoji");
-        }
+
         return em.merge(holiday);
     }
     @Transactional
@@ -33,11 +31,6 @@ public class HolidayRepository {
         return em.merge(holidayType);
     }
 
-    public HolidayResponse findByCountryAndYear(String countryCode, int year){
-        HolidayResponse holiday = em.createQuery(HolidayResponse.GET_BY_COUNTRY_AND_YEAR,HolidayResponse.class).setParameter("countryCode", countryCode).setParameter("year", year).getSingleResult();
-
-        return holiday;
-    }
 
     @Transactional
     public List<HolidayResponse> getAllHolidays() {
