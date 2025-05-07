@@ -14,7 +14,7 @@ public class SchedulerUtil {
     @RestClient
     TimeClient timeClient;
 
-    @Scheduled(every = "1s")
+    @Scheduled(every = "200s")
     void getTime(){
 
         TimeResponse timeResponse = timeClient.getTime("Europe/Amsterdam");

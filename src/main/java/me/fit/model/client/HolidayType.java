@@ -16,7 +16,8 @@ public class HolidayType{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String typeName;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "holiday_id")
     private HolidayResponse holiday;
 
 

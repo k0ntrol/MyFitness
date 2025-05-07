@@ -4,7 +4,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import me.fit.model.client.CountryResponse;
-import me.fit.model.client.HolidayResponse;
+import me.fit.model.client.HolidayApiResponse;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import java.util.List;
@@ -19,6 +19,6 @@ public interface HolidayClient {
 
     @GET
     @Path("/NextPublicHolidays/{countryCode}")
-    List<HolidayResponse> getNextPublicHolidays(@PathParam("countryCode") String countryCode);
+    List<HolidayApiResponse> getNextPublicHolidays(@PathParam("countryCode") String countryCode);
 
 }

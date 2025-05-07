@@ -21,8 +21,8 @@ import java.util.List;
 @Path("/user/")
 public class UserResource {
 
-    @ConfigProperty(name = "greeting.message")
-    String message;
+//    @ConfigProperty(name = "greeting.message")
+//    String message;
 
     @Inject
     UserRepository userRepository;

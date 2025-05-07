@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -27,24 +28,26 @@ public class HolidayResponse {
     private String localName;
     private String name;
     private String countryCode;
+    private boolean fixed;
     private boolean global;
     private int launchYear;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "holiday_id")
-    public Set<HolidayType> types;
+    public Set<HolidayType> types = new HashSet<>();
 
 
     public HolidayResponse() {
         super();
     }
 
-    public HolidayResponse(String date, String localName, String name, String countryCode, boolean global, int launchYear, Set<HolidayType> types) {
+    public HolidayResponse(String date, String localName, String name, String countryCode, boolean fixed, int launchYear, boolean global, Set<HolidayType> types) {
         this.date = date;
         this.localName = localName;
         this.name = name;
         this.countryCode = countryCode;
-        this.global = global;
+        this.fixed = fixed;
         this.launchYear = launchYear;
+        this.global = global;
         this.types = types;
     }
 
@@ -110,5 +113,13 @@ public class HolidayResponse {
 
     public void setTypes(Set<HolidayType> types) {
         this.types = types;
+    }
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
     }
 }
