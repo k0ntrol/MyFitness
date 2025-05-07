@@ -23,7 +23,7 @@ public class Weather {
     private String wind;
     private String description;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "forecast_id")
+    @JoinColumn(name = "weather_id")
     private Set<Forecast> forecasts = new HashSet<>();
 
     public Weather() {

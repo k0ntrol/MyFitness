@@ -19,13 +19,12 @@ public class Forecast {
     private String temperature;
     private String wind;
     @ManyToOne
-    @JoinColumn(name = "weather_id")
     private Weather weather;
 
     public Forecast() {
     }
 
-    public Forecast(String day, String temperature, String wind, Weather weather) {
+    public Forecast(String day, String temperature, String wind,Weather weather) {
         this.day = day;
         this.temperature = temperature;
         this.wind = wind;

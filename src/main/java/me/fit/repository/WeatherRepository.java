@@ -4,6 +4,7 @@ package me.fit.repository;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.transaction.Transactional;
 import me.fit.model.Forecast;
 import me.fit.model.Weather;
@@ -28,6 +29,7 @@ public class WeatherRepository {
     public Forecast addForecast (Forecast f) {
         return em.merge(f);
     }
+
 
     @Transactional
     public List<Weather> getWeather (){

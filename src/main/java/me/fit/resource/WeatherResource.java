@@ -15,6 +15,7 @@ import me.fit.restclient.WeatherClient;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,28 +35,32 @@ public class WeatherResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/getForecast/{city}")
     public Response getCity(@PathParam("city") String city) {
-        WeatherResponse weathers = weatherClient.getCurrentWeather(city);
+        WeatherResponse weatherResponse = weatherClient.getCurrentWeather(city);
+        ArrayList<ForecastResponse> forecasts = weatherResponse.getForecast();
+        Weather w = new Weather();
+            w.setWind(weatherResponse.getWind());
+            w.setTemperature(weatherResponse.getTemperature());
+            w.setDescription(weatherResponse.getDescription());
+        
         List<Weather> saved = new ArrayList<>();
-        for (ForecastResponse forecast : weathers.getForecast()) {
-            Weather w = new Weather();
+        Set<Forecast> fcast = new HashSet<>();
+        for (ForecastResponse forecast : forecasts) {
             Forecast f = new Forecast();
-            w.setWind(weathers.getWind());
-            w.setTemperature(weathers.getTemperature());
-            w.setDescription(weathers.getDescription());
-                            f.setWind(forecast.getWind());
-                            f.setTemperature(forecast.getTemperature());
-                            f.setDay(forecast.getDay());
-                            w.setForecasts(Set.of(f));
-                            try {
-                                weatherRepository.addWeather(w);
-                                saved.add(w);
-                            }catch (Exception e){
-                                System.out.println("Error in saving weather for city " + city);
-                            }
-
+            f.setWind(forecast.getWind());
+            f.setTemperature(forecast.getTemperature());
+            f.setDay(forecast.getDay());
+            fcast.add(f);
 
         }
+        w.setForecasts(fcast);
 
-        return Response.ok().entity(weathers).build();
+        try {
+                weatherRepository.addWeather(w);
+                saved.add(w);
+        }catch (Exception e){
+            System.out.println("Error in saving weather for city " + city);
+        }
+
+        return Response.ok().entity(weatherResponse).build();
     }
 }
